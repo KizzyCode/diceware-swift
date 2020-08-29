@@ -19,7 +19,7 @@ public enum ConcatenationStyle {
     /// Concatenate a string using the given style
     ///
     ///  - Parameter array: The words to concatenate
-    internal func concatenate(_ array: [String]) -> String {
+    internal func apply(_ array: [String]) -> String {
         switch self {
             case .space:
                 return array.joined(separator: " ")
@@ -56,12 +56,12 @@ public struct Diceware {
         // Select random words
         let listSize = UInt32(exactly: list.count)!
         let words = (0 ..< count).map({ _ -> String in
-            let choice = Int(arc4random_uniform(listSize))
+            let choice = Int(exactly: arc4random_uniform(listSize))!
             return list[choice]
         })
         
         // Concatenate words
-        return style.concatenate(words)
+        return style.apply(words)
     }
     
     /// Generates a random diceware string with the amount of words needed to provide at least
