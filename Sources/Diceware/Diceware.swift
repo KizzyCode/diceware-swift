@@ -54,9 +54,9 @@ public struct Diceware {
     public static func random(count: Int, list: [String] = Wordlists.effShortListUniquePrefix,
                               style: ConcatenationStyle = .dot) -> String {
         // Select random words
-        let listSize = UInt32(exactly: list.count)!
+        var rng = SystemRandomNumberGenerator()
         let words = (0 ..< count).map({ _ -> String in
-            let choice = Int(exactly: arc4random_uniform(listSize))!
+            let choice = Int.random(in: 0 ..< list.count, using: &rng)
             return list[choice]
         })
         
