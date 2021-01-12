@@ -6,7 +6,8 @@ import ArgumentParser
 /// The wordlist to use
 enum Wordlist: String, EnumerableFlag {
     case effLarge
-    case effShort
+    case effSmall
+    case germanLarge
 }
 
 
@@ -48,7 +49,8 @@ struct DicewareBin: ParsableCommand {
         let list: [String]
         switch self.wordlist {
             case .effLarge: list = Wordlists.effLargeList
-            case .effShort: list = Wordlists.effShortListUniquePrefix
+            case .effSmall: list = Wordlists.effSmallListUniquePrefix
+            case .germanLarge: list = Wordlists.germanLargeList
         }
         
         // Get the style
@@ -65,8 +67,8 @@ struct DicewareBin: ParsableCommand {
         // Generate the password
         let password: String
         switch self.securityFormat {
-            case .words: password = Diceware.random(count: self.security, list: list, style: style)
-            case .bits: password = Diceware.random(securityBits: self.security, list: list, style: style)
+            case .words: password = try! Diceware.random(count: self.security, list: list, style: style)
+            case .bits: password = try! Diceware.random(securityBits: self.security, list: list, style: style)
         }
         
         print(password)

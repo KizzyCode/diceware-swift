@@ -1,7 +1,7 @@
 public extension Wordlists {
     /// The EFF short wordlist with unique three-letter prefixes
     /// (https://www.eff.org/files/2016/09/08/eff_short_wordlist_2_0.txt)
-    static let effShortListUniquePrefix = [
+    static let effSmallListUniquePrefix = [
         "aardvark",
         "abandoned",
         "abbreviate",

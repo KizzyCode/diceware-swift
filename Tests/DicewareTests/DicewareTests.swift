@@ -6,7 +6,7 @@ final class DicewareTests: XCTestCase {
         // Define test vectors
         let testVectors = [
             (Wordlists.effLargeList, 7776),
-            (Wordlists.effShortListUniquePrefix, 1296)
+            (Wordlists.effSmallListUniquePrefix, 1296)
         ]
         
         // Test test vectors
@@ -35,15 +35,20 @@ final class DicewareTests: XCTestCase {
         }
     }
     
-    func testExample() {
+    func testDeduplication() {
+        XCTAssertThrowsError(try Diceware.random(count: 3, list: ["wordlist", "with", "duplicated", "words", "words"]))
+    }
+    
+    func testExample() throws {
         /// Generate a random password with at least 2^256 possibilities
-        let password = Diceware.random(securityBits: 256)
+        let password = try Diceware.random(securityBits: 256)
         print("Password:", password)
     }
 
     static var allTests = [
         ("testWordlists", testWordlists),
         ("testBitsToWords", testBitsToWords),
+        ("testDeduplication", testDeduplication),
         ("testExample", testExample)
     ]
 }

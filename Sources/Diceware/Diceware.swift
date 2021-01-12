@@ -1,6 +1,13 @@
 import Foundation
 
 
+/// A diceware related error
+public enum DicewareError: Error {
+    /// The list contains duplicate words
+    case duplicateWords(file: StaticString = #file, line: Int = #line)
+}
+
+
 /// A concatenation style
 public enum ConcatenationStyle {
     /// Concatenate the words using spaces (`alpha beta gamma`)
@@ -51,8 +58,14 @@ public struct Diceware {
     ///  - Discussion: This function uses `arc4random` which is considered safe because all modern OS' have replaced the
     ///    underlying permutation with a secure alternative (e.g. AES or ChaCha20). If your OS still uses ARC4, you
     ///    should probably upgrade or stop using this OS.
-    public static func random(count: Int, list: [String] = Wordlists.effShortListUniquePrefix,
-                              style: ConcatenationStyle = .dot) -> String {
+    public static func random(count: Int, list: [String] = Wordlists.effSmallListUniquePrefix,
+                              style: ConcatenationStyle = .dot) throws -> String {
+        // Assert the wordlist contains no duplicates
+        let deduplicated = Set(list)
+        guard deduplicated.count == list.count else {
+            throw DicewareError.duplicateWords()
+        }
+        
         // Select random words
         var rng = SystemRandomNumberGenerator()
         let words = (0 ..< count).map({ _ -> String in
@@ -77,11 +90,11 @@ public struct Diceware {
     ///  - Discussion: This function uses `arc4random` which is considered safe because all modern OS' have replaced the
     ///    underlying permutation with a secure alternative (e.g. AES or ChaCha20). If your OS still uses ARC4, you
     ///    should probably upgrade or stop using this OS.
-    public static func random(securityBits: Int, list: [String] = Wordlists.effShortListUniquePrefix,
-                              style: ConcatenationStyle = .dot) -> String {
+    public static func random(securityBits: Int, list: [String] = Wordlists.effSmallListUniquePrefix,
+                              style: ConcatenationStyle = .dot) throws -> String {
         // Compute the security-bits to word count equivalent
         let wordCount = Self.bitsToWords(securityBits: securityBits, list: list)
-        return Self.random(count: wordCount, list: list, style: style)
+        return try Self.random(count: wordCount, list: list, style: style)
     }
     
     /// Computes the amount of words needed to provide at least `2 ^ securityBits` possible passwords
