@@ -1,0 +1,34 @@
+# Since we use custom test script, disable the default build action
+build: false
+
+
+# The Swift target platforms
+platform:
+  - x86_64-apple-darwin
+
+
+# The Rust feature matrix
+configuration:
+  #- ...
+
+
+# General environment vars
+environment:
+  #KEY: VALUE
+
+
+# Fail fast if one job in the matrix fails
+matrix:
+  fast_finish: true
+
+
+# Define build matrices
+for:
+  - matrix:
+    environment:
+      APPVEYOR_BUILD_WORKER_IMAGE: macOS
+    install:
+      - swift package update
+    test_script:
+      - swift test
+      - swift test -c release
