@@ -25,7 +25,7 @@ matrix:
 # Define build matrices
 for:
   - environment:
-      APPVEYOR_BUILD_WORKER_IMAGE: macOS
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
     install:
       - swift package update
     test_script:
