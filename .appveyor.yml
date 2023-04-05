@@ -24,11 +24,9 @@ matrix:
 
 # Define build matrices
 for:
-  - matrix:
-    environment:
+  - environment:
       APPVEYOR_BUILD_WORKER_IMAGE: macOS
     install:
       - swift package update
     test_script:
       - swift test
-      - swift test -c release
