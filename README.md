@@ -1,6 +1,6 @@
 [![License BSD-2-Clause](https://img.shields.io/badge/License-BSD--2--Clause-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Travis CI](https://travis-ci.org/KizzyCode/diceware-swift.svg?branch=master)](https://travis-ci.org/KizzyCode/diceware-swift)
+[![AppVeyor CI](https://ci.appveyor.com/api/projects/status/github/KizzyCode/diceware-swift?svg=true)](https://ci.appveyor.com/project/KizzyCode/diceware-swift)
 
 # Diceware
 
