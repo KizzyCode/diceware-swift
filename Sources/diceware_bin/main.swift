@@ -37,13 +37,14 @@ struct DicewareBin: ParsableCommand {
     @Flag(help: "The concatenation style to use")
     var style: Style = .dot
     
-    // swiftlint:disable line_length
+    // swiftlint:disable:next line_length
     @Flag(help: "Whether <security> specifies the amount of words or the security level in bits (= the size of the password space in `2^security`)")
     var securityFormat: SecurityFormat = .bits
     
     @Argument(help: "The security level")
     var security = 128
     
+    // swiftlint:disable:next cyclomatic_complexity
     func run() throws {
         // Get the wordlist
         let list: [String]
