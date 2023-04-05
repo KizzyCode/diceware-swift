@@ -7,14 +7,14 @@ platform:
   - x86_64-apple-darwin
 
 
-# The Rust feature matrix
-configuration:
-  #- ...
+# The feature matrix
+#configuration:
+#  - ...
 
 
 # General environment vars
-environment:
-  #KEY: VALUE
+#environment:
+#  KEY: VALUE
 
 
 # Fail fast if one job in the matrix fails
