@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.8
 
 import PackageDescription
 
@@ -15,17 +15,20 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/apple/swift-argument-parser",
-            from: "0.3.1")
+            from: "1.2.2")
     ],
     targets: [
         .target(
             name: "Diceware",
             dependencies: []),
-        .target(
+        .executableTarget(
             name: "diceware_bin",
-            dependencies: ["Diceware", "ArgumentParser"]),
+            dependencies: [
+                .byName(name: "Diceware"),
+                .product(name: "ArgumentParser", package: "swift-argument-parser")]),
         .testTarget(
             name: "DicewareTests",
-            dependencies: ["Diceware"])
+            dependencies: [
+                .byName(name: "Diceware")])
     ]
 )
